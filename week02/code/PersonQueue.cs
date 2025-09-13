@@ -13,7 +13,13 @@ public class PersonQueue
     /// <param name="person">The person to add</param>
     public void Enqueue(Person person)
     {
-        _queue.Insert(0, person);
+        //The code below is wrong for a queue
+        //We must use Add() to "Enqueue" a person
+        //By adding it to the end of the collection we are using
+        //List<Person>
+        //_queue.Insert(0, person);
+        //Correct approach
+        _queue.Add(person);
     }
 
     public Person Dequeue()
