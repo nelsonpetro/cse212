@@ -24,7 +24,7 @@ public class Translator
     /// <returns>fixed array of divisors</returns>
     public void AddWord(string fromWord, string toWord)
     {
-        // ADD YOUR CODE HERE
+        _words[fromWord] = toWord;
     }
 
     /// <summary>
@@ -34,7 +34,18 @@ public class Translator
     /// <returns>The translated word or "???" if no translation is available</returns>
     public string Translate(string fromWord)
     {
-        // ADD YOUR CODE HERE
-        return "";
+        //Initialize the translated work variable to the default value
+        string translatedWord = "???";
+
+        //We check if the _words Dictionary contains the word to translate
+        //If the word (Key) is there we get the value (Translated word)
+        if (_words.ContainsKey(fromWord))
+        {
+            //We assign the value from the dictionary to the translatedWord variable
+            translatedWord = _words[fromWord];
+        }
+        //We return the translated word either "???"
+        //if not found or the value from the dictionary
+        return translatedWord;
     }
 }
