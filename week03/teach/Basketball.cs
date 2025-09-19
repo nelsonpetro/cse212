@@ -17,20 +17,52 @@ public class Basketball
 {
     public static void Run()
     {
-        var players = new Dictionary<string, int>();
+        Dictionary<string, int> players = new Dictionary<string, int>();
 
         using var reader = new TextFieldParser("basketball.csv");
         reader.TextFieldType = FieldType.Delimited;
         reader.SetDelimiters(",");
         reader.ReadFields(); // ignore header row
-        while (!reader.EndOfData) {
+
+
+        while (!reader.EndOfData)
+        {
             var fields = reader.ReadFields()!;
             var playerId = fields[0];
             var points = int.Parse(fields[8]);
+
+            //We check if the Map already contains the element
+            //If it is already in the Map we sum up the points
+            if (players.ContainsKey(playerId))
+            {
+                //Sum up points for an specific player
+                players[playerId] += points;
+            }
+            else
+            {
+                //If player is not in the map
+                //Add it to the map
+                players.Add(playerId, points);
+            }
+
+
         }
 
-        Console.WriteLine($"Players: {{{string.Join(", ", players)}}}");
+        //Console.WriteLine($"Players: {{{string.Join(", ", players)}}}");
 
-        var topPlayers = new string[10];
+        //Convert the Map into an Array
+        var topPlayers = players.ToArray();
+        //Sort the array in descendent order
+        Array.Sort(topPlayers, (p1, p2) => p2.Value.CompareTo(p1.Value));
+        //Display the first 10 players in the Array.
+        for (var i = 0; i < 10; i++)
+        {
+            Console.WriteLine(topPlayers[i]);
+        }
+
+        // foreach (var player in topPlayers)
+        // {
+        //     Console.WriteLine(player);
+        // }
     }
 }
