@@ -11,7 +11,12 @@ public class Node
 
     public void Insert(int value)
     {
-        // TODO Start Problem 1
+        //If the value already exists
+        //We return so no insertion is performed
+        if (value == Data)
+        {
+            return;
+        }
 
         if (value < Data)
         {
@@ -33,13 +38,32 @@ public class Node
 
     public bool Contains(int value)
     {
-        // TODO Start Problem 2
-        return false;
+        //Check if the current node matches
+        if (value == Data)
+        {
+            return true;
+        }
+        //If the value is less than the current note
+        //We enter the left branch
+        if (value < Data)
+        {
+            return Left != null && Left.Contains(value);
+        }
+        //If the value is greater than the current node
+        //We enter the right branch
+        else
+        {
+            return Right != null && Right.Contains(value);
+        }
     }
 
     public int GetHeight()
     {
-        // TODO Start Problem 4
-        return 0; // Replace this line with the correct return statement(s)
+        //Starting getting the height from the left
+        //We check if the node is null, if null, return 0
+        int leftHeight = Left?.GetHeight() ?? 0;
+        int rightHeight = Right?.GetHeight() ?? 0;
+        //We grab the greatest value from the both branches
+        return Math.Max(leftHeight, rightHeight) + 1;
     }
 }
